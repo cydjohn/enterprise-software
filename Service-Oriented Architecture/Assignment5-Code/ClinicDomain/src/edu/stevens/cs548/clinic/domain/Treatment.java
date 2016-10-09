@@ -87,7 +87,7 @@ public abstract class Treatment implements Serializable {
 	}
 	
 	@ManyToOne
-	@JoinColumn(name="patient_fx", referencedColumnName = "id")
+	@JoinColumn(name="provider_fx", referencedColumnName = "id")
 	private Provider provider;
 
 	public Provider getProvider() {

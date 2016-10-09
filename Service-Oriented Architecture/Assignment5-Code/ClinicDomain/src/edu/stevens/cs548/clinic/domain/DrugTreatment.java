@@ -13,6 +13,7 @@ import edu.stevens.cs548.clinic.domain.ITreatmentDAO.TreatmentExn;
 /**
  * Entity implementation class for Entity: DrugTreatment
  */
+
 @Entity
 @NamedQueries({
 	@NamedQuery(

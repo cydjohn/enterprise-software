@@ -4,11 +4,12 @@ import java.util.Date;
 
 public class PatientFactory implements IPatientFactory {
 
-	public Patient createPatient(long pid, String name, Date dob) {
+	public Patient createPatient(long pid, String name, Date dob,int age) {
 		Patient p = new Patient();
 		p.setPatientId(pid);
 		p.setName(name);
 		p.setBirthDate(dob);
+		
 		return null;
 	}
 

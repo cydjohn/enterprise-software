@@ -14,7 +14,6 @@ public class ClinicGateway implements IClinicGateway {
 
 	public IPatientDAO getPatientDAO() {
 		EntityManager em = emf.createEntityManager();
-		
 		return new PatientDAO(em);
 	}
 	

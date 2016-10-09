@@ -9,6 +9,7 @@
 		<project>ClinicRepresentations</project>
 		<project>ClinicTest</project>
 		<project>ClinicRestWebService</project>
+		<project>ClinicDomain</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

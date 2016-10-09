@@ -44,7 +44,6 @@ public class ProviderDAO implements IProviderDAO {
 
 	//4
 	public void addProvider(Provider prov) throws ProviderExn {
-		// TODO Auto-generated method stub
 		long npi = prov.getNpi();
 		TypedQuery<Provider> query = em.createNamedQuery("SearchProviderByNPI", Provider.class)
 				.setParameter("npi", npi);

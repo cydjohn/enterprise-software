@@ -23,7 +23,7 @@ public class PatientDAO implements IPatientDAO {
 	@SuppressWarnings("unused")
 	private Logger logger = Logger.getLogger(PatientDAO.class.getCanonicalName());
 	
-	public void addPatien(Patient patient) throws PatientExn{
+	public void addPatient(Patient patient) throws PatientExn{
 		long pid = patient.getPatientId();
 		TypedQuery<Patient> query = em.createNamedQuery("SearchPatientByPatientID", Patient.class).setParameter("pid", pid);
 		List<Patient> patients = query.getResultList();

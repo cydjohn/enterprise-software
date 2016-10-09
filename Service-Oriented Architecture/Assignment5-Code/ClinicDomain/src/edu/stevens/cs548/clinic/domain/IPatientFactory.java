@@ -4,6 +4,6 @@ import java.util.Date;
 
 public interface IPatientFactory {
 	
-	public Patient createPatient(long pid,String name, Date dob) throws IPatientDAO.PatientExn;
+	public Patient createPatient(long pid,String name, Date dob,int age) throws IPatientDAO.PatientExn;
 
 }

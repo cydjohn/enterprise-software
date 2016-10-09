@@ -21,10 +21,10 @@ import static javax.persistence.CascadeType.REMOVE;
 @NamedQueries({
 	@NamedQuery(
 			name="SearchProviderByNPI",
-			query="select prov from Provider prov where provider.npi = :npi"),
+			query="select prov from Provider prov where prov.npi = :npi"),
 	@NamedQuery(
 			name="RemoveAllProviders",
-			query="delete from Provider provider")
+			query="delete from Provider prov")
 })
 @Table(name="PROVIDER")
 public class Provider implements Serializable {

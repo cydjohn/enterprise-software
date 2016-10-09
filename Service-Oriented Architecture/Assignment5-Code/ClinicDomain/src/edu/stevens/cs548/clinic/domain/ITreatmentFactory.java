@@ -4,7 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 public interface ITreatmentFactory {
-public Treatment createDrugTreatment (String diagnosis, String drug, float dosage);
+	
+	public Treatment createDrugTreatment (String diagnosis, String drug, float dosage);
 	
 	public Treatment createSurgery (String diagnosis, Date date);
 	

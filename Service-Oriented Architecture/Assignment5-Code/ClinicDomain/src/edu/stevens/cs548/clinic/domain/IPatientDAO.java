@@ -19,7 +19,7 @@ public interface IPatientDAO {
 	
 	public List<Patient> getPatientByNameDob(String name,Date dob);
 	
-	public void addPatien(Patient pat) throws PatientExn;
+	public void addPatient(Patient pat) throws PatientExn;
 	
 	public void deletePatient(Patient pat) throws PatientExn;
 }

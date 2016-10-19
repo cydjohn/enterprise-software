@@ -16,5 +16,7 @@ public interface IPatientDAO {
 	public Patient getPatient (long id) throws PatientExn;
 	
 	public void deletePatients();
+	
+	public void deletePatient(Patient patient);
 
 }

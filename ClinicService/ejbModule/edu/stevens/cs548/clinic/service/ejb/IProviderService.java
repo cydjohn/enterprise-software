@@ -1,6 +1,9 @@
 package edu.stevens.cs548.clinic.service.ejb;
 
 import edu.stevens.cs548.clinic.service.dto.TreatmentDto;
+
+import java.util.Date;
+
 import edu.stevens.cs548.clinic.service.dto.ProviderDto;
 
 public interface IProviderService {
@@ -29,6 +32,7 @@ public interface IProviderService {
 		}
 	}
 	
+	
 	public long addProvider(ProviderDto prov) throws ProviderServiceExn;
 	
 	public ProviderDto getProvider(long id) throws ProviderServiceExn;
@@ -40,5 +44,7 @@ public interface IProviderService {
 	public TreatmentDto getTreatment(long id, long tid) throws TreatmentNotFoundExn, ProviderServiceExn;
 		
 	public String siteInfo();
+	
+	
 	
 }

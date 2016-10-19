@@ -51,12 +51,8 @@ public class InitBean {
 	/**
 	 * Default constructor.
 	 */
-	public InitBean() {
-	}
+	public InitBean() {}
 	
-	// TODO inject an EM
-	/*@PersistenceContext(unitName = "ClinicDomain")
-	EntityManager em;*/
 	
 	@Inject @ClinicDomain EntityManager em;
 	
@@ -73,52 +69,16 @@ public class InitBean {
 		try {
 
 			Calendar calendar = Calendar.getInstance();
-			calendar.set(1984, 3, 1);
+			calendar.set(1993, 10, 2);
 			
-			IPatientDAO patientDAO = new PatientDAO(em);
-			IProviderDAO providerDAO = new ProviderDAO(em);
-			ITreatmentDAO treatmentDAO = new TreatmentDAO(em);
 
-			PatientFactory patientFactory = new PatientFactory();
-			ProviderFactory providerFactory = new ProviderFactory();
-			TreatmentFactory treatmentFactory = new TreatmentFactory();
-			
-			/*
-			 * Clear the database and populate with fresh data.
-			 * 
-			 * If we ensure that deletion of patients cascades deletes of treatments,
-			 * then we only need to delete patients.
-			 */
-			patientDAO.deletePatients();
-			
-			Patient john = patientFactory.createPatient(12345678L, "John Doe", calendar.getTime(), 32);
-			patientDAO.addPatient(john);
-			
-			logger.info("Added patient "+john.getName()+" with id "+john.getId());
-			
-			Provider park = providerFactory.createProvider(00000001, "Peter Park", "cold");
-			providerDAO.addProvider(park);
-			logger.info("Added provider "+ park.getName() +" with id "+park.getId());
-			
-			Treatment drug = treatmentFactory.createDrugTreatment("SOS", "xxx", 12);
-			drug.setProvider(park);
-			
-			Treatment surgery = treatmentFactory.createSurgery("help", new Date());
-			surgery.setProvider(park);
-			
-			john.addTreatment(drug);
-			logger.info("Added "+ drug.getTreatmentType() +" treatment with id "+drug.getId() + " to " + drug.getPatient().getName());
-			
-			john.addTreatment(surgery);
-			logger.info("Added "+ surgery.getTreatmentType() +" treatment with id "+surgery.getId() + " to " + surgery.getPatient().getName());
-				
 			
 			PatientDtoFactory patFac = new PatientDtoFactory();
 			PatientDto sean = patFac.createPatientDto();
-			sean.setName("Sean Chen");
-			sean.setPatientId(666888999);
+			sean.setName("James");
+			sean.setPatientId(1234567890);
 			sean.setDob(calendar.getTime());
-			sean.setAge(32);
+			sean.setAge(22);
 			
 			long patId = patientService.addPatient(sean);
 			String seanName = patientService.getPatient(patId).getName();
@@ -127,8 +87,8 @@ public class InitBean {
 			
 			ProviderDtoFactory proFac = new ProviderDtoFactory();
 			ProviderDto jane = proFac.createProviderDto();
-			jane.setName("Jane Shi");
-			jane.setNpi(00000002);
+			jane.setName("Kobe");
+			jane.setNpi(987654321);
 			jane.setSpecialization("fever");
 			long proId = providerService.addProvider(jane);
 			
@@ -139,7 +99,7 @@ public class InitBean {
 			TreatmentDtoFactory treatFac = new TreatmentDtoFactory();
 			
 			TreatmentDto treatDto = treatFac.createSurgeryDto();
-			treatDto.setDiagnosis("AAA");
+			treatDto.setDiagnosis("hehhe");
 			treatDto.setPatient(seanId);
 			treatDto.setProvider(jane.getNpi());
 			SurgeryType surgeryType = new SurgeryType();
@@ -152,21 +112,10 @@ public class InitBean {
 			String diag = patientService.getTreatment(patId, treatId).getDiagnosis();
 			logger.info("new treatment diagnosis is " + diag);
 				
-		} catch (ProviderExn e) {
-			IllegalStateException ex = new IllegalStateException("Failed to add provider record.");
-			ex.initCause(e);
-			throw ex;
 		} catch (PatientServiceExn e) {
 			IllegalStateException ex = new IllegalStateException("Failed to add patient record.");
 			ex.initCause(e);
 			throw ex;
-		} catch (PatientExn e) {
-
-			// logger.log(Level.SEVERE, "Failed to add patient record.", e);
-			IllegalStateException ex = new IllegalStateException("Failed to add patient record.");
-			ex.initCause(e);
-			throw ex;
-			
 		} catch (ProviderServiceExn e) {
 			IllegalStateException ex = new IllegalStateException("Failed to add provider record.");
 			ex.initCause(e);

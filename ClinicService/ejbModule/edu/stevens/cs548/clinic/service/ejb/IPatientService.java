@@ -32,6 +32,20 @@ public interface IPatientService {
 		}
 	}
 	
+	public long createPatient(String name, Date dob, long patientId,int age) throws PatientServiceExn;
+	
+	public PatientDto getPatientByDbId(long id) throws PatientServiceExn;
+	
+	public PatientDto[] getPatientsByNameDob(String name, Date dob);
+	
+	public void deletePatient(String name, long id) throws PatientServiceExn;
+	
+	public void addDrugTreatments(long id, String diagnosis,String drug, float dosage) throws PatientNotFoundExn;
+	
+	public TreatmentDto[] getTreatments (long id, long[] tids) throws PatientNotFoundExn, TreatmentNotFoundExn, PatientServiceExn;
+	
+	public void deleteTreatment(long id, long tid) throws PatientNotFoundExn, TreatmentNotFoundExn, PatientServiceExn;
+	
 	public long addPatient(PatientDto patientDto) throws PatientServiceExn;
 	
 	public PatientDto getPatient (long id) throws PatientServiceExn;
@@ -41,9 +55,6 @@ public interface IPatientService {
 	public TreatmentDto getTreatment(long id, long tid) throws PatientNotFoundExn, TreatmentNotFoundExn, PatientServiceExn;
 	
 	public String siteInfo();
-	
-	
-//	public long createPatient(String name,Date dob,long PatientId) throws PatientServiceExn;
 	
 	
 }

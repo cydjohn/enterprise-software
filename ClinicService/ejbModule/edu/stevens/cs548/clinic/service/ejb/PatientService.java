@@ -233,6 +233,11 @@ public class PatientService implements IPatientServiceLocal,
 		
 	}
 	
+	@Override
+	public void deletePatients() {
+		patientDAO.deletePatients();
+	}
+	
 	// TODO inject resource value
 	@Resource(name="SiteInfo")
 	private String siteInformation;
@@ -242,6 +247,7 @@ public class PatientService implements IPatientServiceLocal,
 	public String siteInfo() {
 		return siteInformation;
 	}
+
 
 
 }

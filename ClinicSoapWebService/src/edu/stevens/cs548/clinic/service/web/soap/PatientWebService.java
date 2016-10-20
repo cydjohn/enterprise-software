@@ -51,6 +51,11 @@ public class PatientWebService implements IPatientWebService {
 			PatientServiceExn {
 		return service.getTreatment(id, tid);
 	}
+	
+	@Override
+	public void deletePatients() {
+		service.deletePatients();
+	}
 
 	@Override
 	public String siteInfo() {

@@ -11,20 +11,20 @@ import javax.ejb.Startup;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
-import edu.stevens.cs548.clinic.domain.IPatientDAO;
-import edu.stevens.cs548.clinic.domain.IPatientDAO.PatientExn;
-import edu.stevens.cs548.clinic.domain.IProviderDAO;
-import edu.stevens.cs548.clinic.domain.IProviderDAO.ProviderExn;
-import edu.stevens.cs548.clinic.domain.ITreatmentDAO;
-import edu.stevens.cs548.clinic.domain.Patient;
-import edu.stevens.cs548.clinic.domain.PatientDAO;
-import edu.stevens.cs548.clinic.domain.PatientFactory;
-import edu.stevens.cs548.clinic.domain.Provider;
-import edu.stevens.cs548.clinic.domain.ProviderDAO;
-import edu.stevens.cs548.clinic.domain.ProviderFactory;
-import edu.stevens.cs548.clinic.domain.Treatment;
-import edu.stevens.cs548.clinic.domain.TreatmentDAO;
-import edu.stevens.cs548.clinic.domain.TreatmentFactory;
+//import edu.stevens.cs548.clinic.domain.IPatientDAO;
+//import edu.stevens.cs548.clinic.domain.IPatientDAO.PatientExn;
+//import edu.stevens.cs548.clinic.domain.IProviderDAO;
+//import edu.stevens.cs548.clinic.domain.IProviderDAO.ProviderExn;
+//import edu.stevens.cs548.clinic.domain.ITreatmentDAO;
+//import edu.stevens.cs548.clinic.domain.Patient;
+//import edu.stevens.cs548.clinic.domain.PatientDAO;
+//import edu.stevens.cs548.clinic.domain.PatientFactory;
+//import edu.stevens.cs548.clinic.domain.Provider;
+//import edu.stevens.cs548.clinic.domain.ProviderDAO;
+//import edu.stevens.cs548.clinic.domain.ProviderFactory;
+//import edu.stevens.cs548.clinic.domain.Treatment;
+//import edu.stevens.cs548.clinic.domain.TreatmentDAO;
+//import edu.stevens.cs548.clinic.domain.TreatmentFactory;
 import edu.stevens.cs548.clinic.service.dto.PatientDto;
 import edu.stevens.cs548.clinic.service.dto.ProviderDto;
 import edu.stevens.cs548.clinic.service.dto.SurgeryType;
@@ -53,7 +53,6 @@ public class InitBean {
 	 */
 	public InitBean() {}
 	
-	
 	@Inject @ClinicDomain EntityManager em;
 	
 	@Inject IPatientServiceLocal patientService;
@@ -65,32 +64,34 @@ public class InitBean {
 		 * Put your testing logic here. Use the logger to display testing output in the server logs.
 		 */
 		logger.info("Your name here: Yudong Cao 2016-10-16");
+		
+//		PatientDAO patientDAO = new PatientDAO(em);
 
 		try {
+
+			patientService.deletePatients();
 
 			Calendar calendar = Calendar.getInstance();
 			calendar.set(1993, 10, 2);
 			
-
-			
 			PatientDtoFactory patFac = new PatientDtoFactory();
-			PatientDto sean = patFac.createPatientDto();
-			sean.setName("James");
-			sean.setPatientId(1234567890);
-			sean.setDob(calendar.getTime());
-			sean.setAge(22);
+			PatientDto patient1 = patFac.createPatientDto();
+			patient1.setName("James");
+			patient1.setPatientId(1234567890);
+			patient1.setDob(calendar.getTime());
+			patient1.setAge(22);
 			
-			long patId = patientService.addPatient(sean);
+			long patId = patientService.addPatient(patient1);
 			String seanName = patientService.getPatient(patId).getName();
 			long seanId = patientService.getPatient(patId).getId();
 			logger.info("Added patient "+seanName+" with id "+seanId);
 			
 			ProviderDtoFactory proFac = new ProviderDtoFactory();
-			ProviderDto jane = proFac.createProviderDto();
-			jane.setName("Kobe");
-			jane.setNpi(987654321);
-			jane.setSpecialization("fever");
-			long proId = providerService.addProvider(jane);
+			ProviderDto provider1 = proFac.createProviderDto();
+			provider1.setName("Kobe");
+			provider1.setNpi(987654321);
+			provider1.setSpecialization("fever");
+			long proId = providerService.addProvider(provider1);
 			
 			String janeName = providerService.getProvider(proId).getName();
 			long janeId = providerService.getProvider(proId).getId();
@@ -101,11 +102,11 @@ public class InitBean {
 			TreatmentDto treatDto = treatFac.createSurgeryDto();
 			treatDto.setDiagnosis("hehhe");
 			treatDto.setPatient(seanId);
-			treatDto.setProvider(jane.getNpi());
+			treatDto.setProvider(provider1.getNpi());
 			SurgeryType surgeryType = new SurgeryType();
 			surgeryType.setData(new Date());
 			treatDto.setSurgery(surgeryType);
-			long treatId = providerService.addTreatmentForPat(treatDto, patId, jane.getNpi());
+			long treatId = providerService.addTreatmentForPat(treatDto, patId, provider1.getNpi());
 			
 			logger.info("patient's name:" + patId + " and provider with npi:" + providerService.getProvider(proId).getNpi() + "add drug treatment with id:" + treatId);
 			

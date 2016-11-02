@@ -4,14 +4,11 @@
 	<comment></comment>
 	<projects>
 		<project>ClinicDTOs</project>
-		<project>ClinicInit</project>
-		<project>ClinicRepresentations</project>
-		<project>ClinicRestWebService</project>
 		<project>ClinicService</project>
-		<project>ClinicServiceClient</project>
-		<project>ClinicSoapWebService</project>
-		<project>ClinicTest</project>
 		<project>ClinicWebService</project>
+		<project>ClinicRepresentations</project>
+		<project>ClinicTest</project>
+		<project>ClinicRestWebService</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

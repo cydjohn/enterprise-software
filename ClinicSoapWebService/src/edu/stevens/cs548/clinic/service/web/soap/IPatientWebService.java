@@ -44,11 +44,6 @@ public interface IPatientWebService {
 	public TreatmentDto getTreatment(long id, long tid) throws PatientNotFoundExn, TreatmentNotFoundExn, PatientServiceExn;
 
 	@WebMethod
-	@WebResult(name="patient-dto",
-			targetNamespace="http://cs548.stevens.edu/clinic/dto")
-	public void deletePatients();
-	
-	@WebMethod
 	public String siteInfo();
 
 }

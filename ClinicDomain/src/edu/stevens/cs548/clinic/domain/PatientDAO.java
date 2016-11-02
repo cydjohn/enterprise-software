@@ -91,10 +91,4 @@ public class PatientDAO implements IPatientDAO {
 		update.executeUpdate();
 	}
 
-	
-	@Override
-	public void deletePatient(Patient patient) {
-		em.remove(patient);
-	}
-
 }

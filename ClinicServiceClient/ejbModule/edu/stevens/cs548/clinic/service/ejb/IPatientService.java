@@ -34,8 +34,6 @@ public interface IPatientService {
 	
 	public TreatmentDto getTreatment(long id, long tid) throws PatientNotFoundExn, TreatmentNotFoundExn, PatientServiceExn;
 
-	public void deletePatients();
-	
 	public String siteInfo();
 
 }

@@ -19,8 +19,6 @@ import edu.stevens.cs548.clinic.domain.Patient;
 import edu.stevens.cs548.clinic.domain.PatientDAO;
 import edu.stevens.cs548.clinic.domain.PatientFactory;
 import edu.stevens.cs548.clinic.domain.Provider;
-import edu.stevens.cs548.clinic.domain.Treatment;
-import edu.stevens.cs548.clinic.domain.TreatmentFactory;
 import edu.stevens.cs548.clinic.service.dto.DrugTreatmentType;
 import edu.stevens.cs548.clinic.service.dto.ObjectFactory;
 import edu.stevens.cs548.clinic.service.dto.PatientDto;
@@ -41,7 +39,6 @@ public class PatientService implements IPatientServiceLocal,
 
 	private PatientFactory patientFactory;
 	
-	@SuppressWarnings("unused")
 	private PatientDtoFactory patientDtoFactory;
 
 	private IPatientDAO patientDAO;
@@ -165,89 +162,14 @@ public class PatientService implements IPatientServiceLocal,
 		}
 	}
 
-	@Override
-	public long createPatient(String name, Date dob, long patientId, int age) throws PatientServiceExn {
-		try {
-			Patient patient = this.patientFactory.createPatient(patientId, name, dob, age);
-			patientDAO.addPatient(patient);
-			return patient.getId();
-		} catch (PatientExn e) {
-			throw new PatientServiceExn(e.toString());
-		}
-	}
-
-	@Override
-	public PatientDto getPatientByDbId(long id) throws PatientServiceExn {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public PatientDto[] getPatientsByNameDob(String name, Date dob) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void deletePatient(String name, long id) throws PatientServiceExn {
-		Patient patient;
-		try {
-			patient = patientDAO.getPatient(id);
-			if(!name.equals(patient.getName())) {
-				throw new PatientServiceExn(
-						"Tried to delete wrong patient: name = "+name + "id = " + id);
-			}
-			else {
-				patientDAO.deletePatient(patient);
-			}
-		} catch (PatientExn e) {
-			throw new PatientServiceExn(e.toString());
-		}
-		
-		
-	}
-
-	@Override
-	public void addDrugTreatments(long id, String diagnosis, String drug, float dosage) throws PatientNotFoundExn {
-		try {
-			Patient patient = patientDAO.getPatient(id);
-			TreatmentFactory treatmentFactory = new TreatmentFactory();
-			Treatment drugtreat = treatmentFactory.createDrugTreatment(diagnosis, drug, dosage);
-			patient.addTreatment(drugtreat);
-
-		} catch (PatientExn e) {
-			throw new PatientNotFoundExn(e.toString());
-		}
-	}
-
-	@Override
-	public TreatmentDto[] getTreatments(long id, long[] tids)
-			throws PatientNotFoundExn, TreatmentNotFoundExn, PatientServiceExn {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void deleteTreatment(long id, long tid) throws PatientNotFoundExn, TreatmentNotFoundExn, PatientServiceExn {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	@Override
-	public void deletePatients() {
-		patientDAO.deletePatients();
-	}
-	
 	// TODO inject resource value
 	@Resource(name="SiteInfo")
 	private String siteInformation;
-		
+	
 
 	@Override
 	public String siteInfo() {
 		return siteInformation;
 	}
-
-
 
 }

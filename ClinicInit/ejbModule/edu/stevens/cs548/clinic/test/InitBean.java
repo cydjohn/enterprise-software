@@ -11,7 +11,8 @@ import javax.ejb.Startup;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
-//import edu.stevens.cs548.clinic.domain.IPatientDAO;
+import edu.stevens.cs548.clinic.domain.IPatientDAO;
+import edu.stevens.cs548.clinic.domain.PatientDAO;
 //import edu.stevens.cs548.clinic.domain.IPatientDAO.PatientExn;
 //import edu.stevens.cs548.clinic.domain.IProviderDAO;
 //import edu.stevens.cs548.clinic.domain.IProviderDAO.ProviderExn;
@@ -65,11 +66,11 @@ public class InitBean {
 		 */
 		logger.info("Your name here: Yudong Cao 2016-10-16");
 		
-//		PatientDAO patientDAO = new PatientDAO(em);
+		PatientDAO patientDAO = new PatientDAO(em);
 
 		try {
-
-			patientService.deletePatients();
+			patientDAO.deletePatients();
+//			patientService.deletePatients();
 
 			Calendar calendar = Calendar.getInstance();
 			calendar.set(1993, 10, 2);
@@ -89,7 +90,7 @@ public class InitBean {
 			ProviderDtoFactory proFac = new ProviderDtoFactory();
 			ProviderDto provider1 = proFac.createProviderDto();
 			provider1.setName("Kobe");
-			provider1.setNpi(987654321);
+			provider1.setNpi(1234567890);
 			provider1.setSpecialization("fever");
 			long proId = providerService.addProvider(provider1);
 			

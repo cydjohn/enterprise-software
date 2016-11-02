@@ -33,6 +33,11 @@
 							<artifactId>ClinicSoapWebService</artifactId>
 							<contextRoot>/clinic-soap</contextRoot>
 						</webModule>
+						<webModule>
+							<groupId>edu.stevens.cs548</groupId>
+							<artifactId>ClinicRestWebService</artifactId>
+							<contextRoot>/clinic-rest</contextRoot>
+						</webModule>
 						<ejbModule>
 							<groupId>edu.stevens.cs548</groupId>
 							<artifactId>ClinicService</artifactId>
@@ -84,6 +89,15 @@
 		<dependency>
 			<groupId>edu.stevens.cs548</groupId>
 			<artifactId>ClinicSoapWebService</artifactId>
+			<type>war</type>
+		</dependency>
+		<dependency>
+			<groupId>edu.stevens.cs548</groupId>
+			<artifactId>ClinicRepresentations</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>edu.stevens.cs548</groupId>
+			<artifactId>ClinicRestWebService</artifactId>
 			<type>war</type>
 		</dependency>
 		<dependency>

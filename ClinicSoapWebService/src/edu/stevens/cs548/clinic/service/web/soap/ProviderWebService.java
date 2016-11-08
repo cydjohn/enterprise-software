@@ -13,7 +13,7 @@ import edu.stevens.cs548.clinic.service.ejb.IProviderServiceRemote;
 
 @WebService(
 		endpointInterface = "edu.stevens.cs548.clinic.service.web.soap.IProviderWebService", 
-		targetNamespace = "http://cs548.stevens.edu/clinic/service/web/soap/provider", 
+		targetNamespace = "http://cs548.stevens.edu/clinic/service/web/soap", 
 		serviceName = "ProviderWebService", portName = "ProviderWebPort"
 		)
 

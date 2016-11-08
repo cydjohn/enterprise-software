@@ -5,6 +5,7 @@ import java.net.URISyntaxException;
 
 import edu.stevens.cs548.clinic.service.web.rest.data.dap.LinkType;
 
+
 public abstract class Representation {
 	
 	public static final String RELATIONS = "http://cs548.stevens.edu/clinic/rest/relations/";

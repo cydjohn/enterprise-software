@@ -13,7 +13,7 @@ import edu.stevens.cs548.clinic.service.ejb.IPatientService.TreatmentNotFoundExn
 
 @WebService(
 	name="IPatientWebPort",
-	targetNamespace="http://cs548.stevens.edu/clinic/service/web/soap/patient"
+	targetNamespace="http://cs548.stevens.edu/clinic/service/web/soap"
 	//targetNamespace="http://www.example.org/clinic/wsdl/patient"
 	)
 

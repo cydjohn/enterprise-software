@@ -13,7 +13,6 @@ import javax.persistence.EntityManager;
 import edu.stevens.cs548.clinic.domain.IProviderDAO.ProviderExn;
 import edu.stevens.cs548.clinic.domain.ITreatmentDAO.TreatmentExn;
 import edu.stevens.cs548.clinic.domain.ITreatmentExporter;
-import edu.stevens.cs548.clinic.domain.Patient;
 import edu.stevens.cs548.clinic.domain.PatientDAO;
 import edu.stevens.cs548.clinic.domain.Provider;
 import edu.stevens.cs548.clinic.domain.ProviderDAO;
@@ -35,7 +34,7 @@ import edu.stevens.cs548.clinic.service.dto.TreatmentDto;
 public class ProviderService implements IProviderServiceLocal, IProviderServiceRemote{
 
 	@SuppressWarnings("unused")
-	private Logger logger = Logger.getLogger(PatientService.class.getCanonicalName());
+	private Logger logger = Logger.getLogger(ProviderService.class.getCanonicalName());
 	
 	private ProviderFactory providerFactory;
 	
@@ -91,8 +90,8 @@ public class ProviderService implements IProviderServiceLocal, IProviderServiceR
 	public long addTreatmentForPat(TreatmentDto treatment, long pid, long npi)
 			throws TreatmentNotFoundExn, PatientNotFoundExn, ProviderServiceExn {
 		try {
-			Patient pat = patientDAO.getPatient(pid);
-			Provider prov = providerDAO.getProviderByNPI(npi);
+			//Provider prov = providerDAO.getProviderByNPI(npi);
+			Provider prov = providerDAO.getProvider(npi);
 			TreatmentFactory treatmentFactory = new TreatmentFactory();
 			if (npi != treatment.getProvider()){
 				throw new ProviderServiceExn("The provider can not add this treatment:npi = "+npi);
@@ -100,15 +99,15 @@ public class ProviderService implements IProviderServiceLocal, IProviderServiceR
 			if (treatment.getDrugTreatment() != null){
 				Treatment t = treatmentFactory.createDrugTreatment(treatment.getDiagnosis(), treatment.getDrugTreatment().getName(), treatment.getDrugTreatment().getDosage());
 				t.setProvider(prov);
-				return pat.addTreatment(t);
+				return patientDAO.getPatient(pid).addTreatment(t);
 			} else if (treatment.getSurgery() != null){
 				Treatment t = treatmentFactory.createSurgery(treatment.getDiagnosis(), treatment.getSurgery().getData());
 				t.setProvider(prov);
-				return pat.addTreatment(t);
+				return patientDAO.getPatient(pid).addTreatment(t);
 			} else if (treatment.getRadiology() != null) {
 				Treatment t = treatmentFactory.createRadiology(treatment.getDiagnosis(), treatment.getRadiology().getDate());
 				t.setProvider(prov);
-				return pat.addTreatment(t);
+				return patientDAO.getPatient(pid).addTreatment(t);
 			} else {
 				throw new TreatmentNotFoundExn("The treatment type is null!");
 			}

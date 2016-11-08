@@ -23,7 +23,6 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
@@ -35,9 +34,9 @@ import javax.ws.rs.core.UriInfo;
 public class ProviderResource {
 	@Inject IProviderServiceLocal providerService;
 	
-//    @SuppressWarnings("unused")
-//    @Context
-//    private UriInfo uriInfo;
+    @SuppressWarnings("unused")
+    @Context
+    private UriInfo uriInfo;
     
     private ProviderDtoFactory providerDtoFactory;
     private TreatmentDtoFactory treatmentDtoFactory;
@@ -60,7 +59,7 @@ public class ProviderResource {
     
     @POST
     @Consumes("application/xml")
-    public Response addProvider(ProviderRepresentation providerRep,@Context UriInfo uriInfo){
+    public Response addProvider(ProviderRepresentation providerRep){
     	try {
     		ProviderDto dto = providerDtoFactory.createProviderDto();
         	dto.setNpi(providerRep.getNpi());
@@ -78,7 +77,7 @@ public class ProviderResource {
     @GET
     @Path("{id}")
     @Produces("application/xml")
-    public ProviderRepresentation getProvider(@PathParam("id") String id,@Context UriInfo uriInfo) {
+    public ProviderRepresentation getProvider(@PathParam("id") String id) {
         try {
         	long key = Long.parseLong(id);
 			ProviderDto providerDTO = providerService.getProvider(key);
@@ -88,12 +87,11 @@ public class ProviderResource {
 			throw new WebApplicationException();
 		}
     }
-
     
     @GET
     @Path("/byNPI")
     @Produces("application/xml")
-    public ProviderRepresentation getProviderByNPI(@QueryParam("id") String npi,@Context UriInfo uriInfo) {
+    public ProviderRepresentation getProviderByNPI(@PathParam("id") String npi) {
         try {
         	long key = Long.parseLong(npi);
 			ProviderDto providerDTO = providerService.getProviderByNPI(key);
@@ -105,9 +103,9 @@ public class ProviderResource {
     }
     
     @POST
-    @Path("{id}/treatments")
+    @Path("/id/treatments")
     @Consumes("application/xml")
-    public Response addTreatment(@HeaderParam("id") String patientId, TreatmentRepresentation treatmentRep,@Context UriInfo uriInfo){
+    public Response addTreatment(@HeaderParam("id") String patientId, TreatmentRepresentation treatmentRep){
     	try {
     		TreatmentDto dto = null;
 	    	if (treatmentRep.getDrugTreatment() != null){
@@ -117,7 +115,7 @@ public class ProviderResource {
 	    		dto.setDiagnosis(treatmentRep.getDiagnosis());
 	    		dto.getDrugTreatment().setName(treatmentRep.getDrugTreatment().getName());
 	    		dto.getDrugTreatment().setDosage(treatmentRep.getDrugTreatment().getDosage());
-				long id = providerService.addTreatmentForPat(dto, Long.parseLong(patientId), this.getProvider(String.valueOf(dto.getProvider()),uriInfo).getNpi());
+				long id = providerService.addTreatmentForPat(dto, Long.parseLong(patientId), this.getProvider(String.valueOf(dto.getProvider())).getNpi());
 				UriBuilder ub = uriInfo.getAbsolutePathBuilder().path("{id}");
 	    		URI url = ub.build(Long.toString(id));
 	    		return Response.created(url).build();
@@ -126,8 +124,8 @@ public class ProviderResource {
 	    		dto.setPatient(Representation.getId(treatmentRep.getLinkPatient()));
 	    		dto.setProvider(Representation.getId(treatmentRep.getLinkProvider()));
 	    		dto.setDiagnosis(treatmentRep.getDiagnosis());
-	    		dto.getSurgery().setData(treatmentRep.getSurgery().getData());;
-	    		long id = providerService.addTreatmentForPat(dto, Long.parseLong(patientId), this.getProvider(String.valueOf(dto.getProvider()),uriInfo).getNpi());
+	    		dto.getSurgery().setData(treatmentRep.getSurgery().getDate());;
+	    		long id = providerService.addTreatmentForPat(dto, Long.parseLong(patientId), this.getProvider(String.valueOf(dto.getProvider())).getNpi());
 				UriBuilder ub = uriInfo.getAbsolutePathBuilder().path("{id}");
 	    		URI url = ub.build(Long.toString(id));
 	    		return Response.created(url).build();
@@ -137,7 +135,7 @@ public class ProviderResource {
 	    		dto.setProvider(Representation.getId(treatmentRep.getLinkProvider()));
 	    		dto.setDiagnosis(treatmentRep.getDiagnosis());
 	    		dto.getRadiology().setDate(treatmentRep.getRadiology().getDate());
-	    		long id = providerService.addTreatmentForPat(dto, Long.parseLong(patientId), this.getProvider(String.valueOf(dto.getProvider()),uriInfo).getNpi());
+	    		long id = providerService.addTreatmentForPat(dto, Long.parseLong(patientId), this.getProvider(String.valueOf(dto.getProvider())).getNpi());
 				UriBuilder ub = uriInfo.getAbsolutePathBuilder().path("{id}");
 	    		URI url = ub.build(Long.toString(id));
 	    		return Response.created(url).build();
@@ -153,9 +151,9 @@ public class ProviderResource {
     }
     
     @GET
-    @Path("{id}/treatment/{tid}")
+    @Path("{id}/treatments/{tid}")
     @Produces("application/xml")
-    public TreatmentRepresentation getProviderTreatment(@PathParam("id") String id, @PathParam("tid") String tid,@Context UriInfo uriInfo){
+    public TreatmentRepresentation getProviderTreatment(@PathParam("id") String id, @PathParam("tid") String tid){
     	try {
 			TreatmentDto dto = providerService.getTreatment(Long.parseLong(id), Long.parseLong(tid));
 			TreatmentRepresentation treatmentRep = new TreatmentRepresentation(dto, uriInfo);

@@ -37,8 +37,9 @@ public class PatientResource {
 	 */
 	@Inject IPatientServiceLocal patientService;
 	
-//	@Context
-//    private UriInfo uriInfo;
+	@SuppressWarnings("unused")
+	@Context
+    private UriInfo uriInfo;
     
     private PatientDtoFactory patientDtoFactory;
 
@@ -64,10 +65,8 @@ public class PatientResource {
 	 */
     @POST
     @Consumes("application/xml")
-    public Response addPatient(PatientRepresentation patientRep,@Context UriInfo uriInfo) {
-    	
+    public Response addPatient(PatientRepresentation patientRep) {
     	try {
-    		
     		PatientDto dto = patientDtoFactory.createPatientDto();
     		dto.setPatientId(patientRep.getPatientId());
     		dto.setName(patientRep.getName());
@@ -85,7 +84,7 @@ public class PatientResource {
     @GET
     @Path("{id}")
     @Produces("application/xml")
-	public PatientRepresentation getPatient(@PathParam("id") String id,@Context UriInfo uriInfo) {
+	public PatientRepresentation getPatient(@PathParam("id") String id) {
 		try {
 			long key = Long.parseLong(id);
 			PatientDto patientDTO = patientService.getPatient(key);
@@ -99,7 +98,7 @@ public class PatientResource {
     @GET
     @Path("/byPatientId")
     @Produces("application/xml")
-	public PatientRepresentation getPatientByPatientId(@QueryParam("id") String patientId,@Context UriInfo uriInfo) {
+	public PatientRepresentation getPatientByPatientId(@QueryParam("id") String patientId) {
     	try {
 			long pid = Long.parseLong(patientId);
 			PatientDto patientDTO = patientService.getPatientByPatId(pid);
@@ -116,7 +115,7 @@ public class PatientResource {
     @GET
     @Path("{id}/treatments/{tid}")
     @Produces("application/xml")
-    public TreatmentRepresentation getPatientTreatment(@PathParam("id") String id, @PathParam("tid") String tid,@Context UriInfo uriInfo) {
+    public TreatmentRepresentation getPatientTreatment(@PathParam("id") String id, @PathParam("tid") String tid) {
     	try {
     		TreatmentDto treatment = patientService.getTreatment(Long.parseLong(id), Long.parseLong(tid)); 
     		TreatmentRepresentation treatmentRep = new TreatmentRepresentation(treatment, uriInfo);

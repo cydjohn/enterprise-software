@@ -50,7 +50,7 @@
     </complexType>
     <complexType name="SurgeryType">
         <sequence>
-            <element name="data" type="date"/>
+            <element name="date" type="date"/>
         </sequence>
     </complexType>
 

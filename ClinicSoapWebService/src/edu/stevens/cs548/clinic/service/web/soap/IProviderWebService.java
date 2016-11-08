@@ -4,7 +4,6 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
-import javax.jws.soap.SOAPBinding;
 
 import edu.stevens.cs548.clinic.service.dto.ProviderDto;
 import edu.stevens.cs548.clinic.service.dto.TreatmentDto;
@@ -14,14 +13,9 @@ import edu.stevens.cs548.clinic.service.ejb.IProviderService.ProviderServiceExn;
 
 @WebService(
 		name="IProviderWebPort",
-		targetNamespace="http://cs548.stevens.edu/clinic/service/web/soap/provider"
+		targetNamespace="http://cs548.stevens.edu/clinic/service/web/soap"
 		//targetNamespace="http://www.example.org/clinic/wsdl/provider"
 		)
-
-@SOAPBinding(
-		style=SOAPBinding.Style.DOCUMENT,
-		use=SOAPBinding.Use.LITERAL,
-		parameterStyle=SOAPBinding.ParameterStyle.WRAPPED)
 
 public interface IProviderWebService {
 

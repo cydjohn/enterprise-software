@@ -65,7 +65,7 @@ public class TreatmentRepresentation extends TreatmentType {
 			 * TODO finish this
 			 */
 			this.surgery = repFactory.createSurgeryType();
-			this.surgery.setData(dto.getSurgery().getData());
+			this.surgery.setDate(dto.getSurgery().getData());
 		} else if (dto.getRadiology() != null) {
 			/*
 			 * TODO finish this
@@ -104,7 +104,7 @@ public class TreatmentRepresentation extends TreatmentType {
 			m.setPatient(Representation.getId(patient));
 			m.setProvider(Representation.getId(provider));
 			m.setDiagnosis(diagnosis);
-			m.getSurgery().setData(this.getSurgery().getData());
+			m.getSurgery().setData(this.getSurgery().getDate());
 		} else if (this.getRadiology() != null) {
 			/*
 			 * TODO finish this

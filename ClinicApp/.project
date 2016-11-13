@@ -3,12 +3,14 @@
 	<name>ClinicApp</name>
 	<comment></comment>
 	<projects>
+		<project>ClinicDomain</project>
 		<project>ClinicDTOs</project>
-		<project>ClinicService</project>
 		<project>ClinicWebService</project>
 		<project>ClinicRepresentations</project>
 		<project>ClinicTest</project>
-		<project>ClinicRestWebService</project>
+		<project>ClinicBillingWebApp</project>
+		<project>ClinicBillingService</project>
+		<project>ClinicBillingServiceClient</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

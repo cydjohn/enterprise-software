@@ -2,6 +2,18 @@
     <wb-module deploy-name="ClinicApp-1.0.0">
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/ear-resources"/>
         <wb-resource deploy-path="/" source-path="/EarContent" tag="defaultRootSource"/>
+        <dependent-module archiveName="ClinicBillingWebApp-1.0.0.war" deploy-path="/" handle="module:/resource/ClinicBillingWebApp/ClinicBillingWebApp">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="ClinicBillingService-1.0.0.jar" deploy-path="/" handle="module:/resource/ClinicBillingService/ClinicBillingService">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="ClinicResearchWebApp-1.0.0.war" deploy-path="/" handle="module:/resource/ClinicResearchWebApp/ClinicResearchWebApp">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="ClinicResearchService-1.0.0.jar" deploy-path="/" handle="module:/resource/ClinicResearchService/ClinicResearchService">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <dependent-module archiveName="ClinicSoapWebService-1.0.0.war" deploy-path="/" handle="module:/resource/ClinicSoapWebService/ClinicSoapWebService">
             <dependency-type>uses</dependency-type>
         </dependent-module>
@@ -24,6 +36,12 @@
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="ClinicServiceClient-1.0.0.jar" deploy-path="/lib" handle="module:/resource/ClinicServiceClient/ClinicServiceClient">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="ClinicBillingServiceClient-1.0.0.jar" deploy-path="/lib" handle="module:/resource/ClinicBillingServiceClient/ClinicBillingServiceClient">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="ClinicResearchServiceClient-1.0.0.jar" deploy-path="/lib" handle="module:/resource/ClinicResearchServiceClient/ClinicResearchServiceClient">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <property name="component.inclusion.patterns" value="META-INF/**,**/Clinic*.jar,**/Clinic*.war"/>

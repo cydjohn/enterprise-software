@@ -59,9 +59,9 @@ public class ResearchService implements IResearchServiceLocal, IResearchServiceR
 	@SuppressWarnings("unused")
 	private DrugTreatmentDTO toDTO(DrugTreatmentRecord treatment) {
 		DrugTreatmentDTO dto = drugTreatmentDtoFactory.createDrugTreatmentDTO();
-		dto.setPatientId(treatment.getSubject().getId());
+		dto.setPatientId(treatment.getPatient().getId());
 		dto.setTreatmentId(treatment.getId());
-		dto.setDrugName(treatment.getDrugName());
+		dto.setDrugName(treatment.getDrug());
 		dto.setDate(treatment.getDate());
 		dto.setDosage(treatment.getDosage());
 		return dto;

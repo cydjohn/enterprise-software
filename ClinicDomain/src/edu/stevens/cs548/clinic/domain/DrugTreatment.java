@@ -27,6 +27,7 @@ public class DrugTreatment extends Treatment implements Serializable {
 
 	private String drug;
 	private float dosage;
+	
 
 	public String getDrug() {
 		return drug;

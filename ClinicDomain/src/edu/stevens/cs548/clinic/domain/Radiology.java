@@ -11,6 +11,7 @@ import javax.persistence.*;
  * Entity implementation class for Entity: Radiology
  *
  */
+
 @Entity
 @NamedQueries({
 	@NamedQuery(

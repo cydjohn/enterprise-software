@@ -24,7 +24,8 @@ public class Drug implements Serializable {
 		super();
 	}
 	
-	@Id @GeneratedValue
+	@Id 
+	@GeneratedValue
 	private long id;
 	
 	private String name;

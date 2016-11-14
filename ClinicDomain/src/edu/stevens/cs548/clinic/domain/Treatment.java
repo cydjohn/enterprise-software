@@ -31,6 +31,7 @@ public abstract class Treatment implements Serializable {
 	private long id;
 	private String diagnosis;
 
+	
 	public long getId() {
 		return id;
 	}

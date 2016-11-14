@@ -34,7 +34,6 @@ import javax.ws.rs.core.UriInfo;
 public class ProviderResource {
 	@Inject IProviderServiceLocal providerService;
 	
-    @SuppressWarnings("unused")
     @Context
     private UriInfo uriInfo;
     

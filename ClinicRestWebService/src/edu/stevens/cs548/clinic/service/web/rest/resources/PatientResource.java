@@ -37,7 +37,6 @@ public class PatientResource {
 	 */
 	@Inject IPatientServiceLocal patientService;
 	
-	@SuppressWarnings("unused")
 	@Context
     private UriInfo uriInfo;
     

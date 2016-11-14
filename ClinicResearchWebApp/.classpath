@@ -22,19 +22,5 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry combineaccessrules="false" kind="src" path="/ClinicBillingService"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/ClinicBillingServiceClient"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/ClinicBillingWebApp"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/ClinicDomain"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/ClinicDTOs"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/ClinicInit"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/ClinicRepresentations"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/ClinicResearchService"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/ClinicResearchServiceClient"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/ClinicRestWebService"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/ClinicRoot"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/ClinicService"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/ClinicServiceClient"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/ClinicSoapWebService"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

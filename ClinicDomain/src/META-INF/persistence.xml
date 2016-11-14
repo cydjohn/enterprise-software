@@ -12,6 +12,8 @@
 		<class>edu.stevens.cs548.clinic.domain.Provider</class>
 		<class>edu.stevens.cs548.clinic.domain.Radiology</class>
 		<class>edu.stevens.cs548.clinic.domain.Surgery</class>
+		<class>edu.stevens.cs548.clinic.domain.research.Drug</class>
+		<class>edu.stevens.cs548.clinic.domain.billing.BillingRecord</class>
 		<properties>
 			<!-- <property name="eclipselink.target-database" value="Derby"/> -->
 			<property name="eclipselink.target-database" value="PostgreSQL" />

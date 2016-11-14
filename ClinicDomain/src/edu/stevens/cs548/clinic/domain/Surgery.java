@@ -20,7 +20,6 @@ import javax.persistence.*;
 @DiscriminatorValue("S")
 
 public class Surgery extends Treatment implements Serializable {
-
 	
 	private static final long serialVersionUID = 1L;
 

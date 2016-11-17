@@ -6,8 +6,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
-import edu.stevens.cs548.clinic.research.DrugTreatmentRecord;
-import edu.stevens.cs548.clinic.research.Subject;
+import edu.stevens.cs548.clinic.domain.billing.DrugTreatmentRecord;
+import edu.stevens.cs548.clinic.domain.billing.Subject;
+
 
 public class ResearchDAO implements IResearchDAO {
 	

@@ -2,9 +2,10 @@ package edu.stevens.cs548.clinic.research.domain;
 
 import java.util.List;
 
+import edu.stevens.cs548.clinic.domain.billing.DrugTreatmentRecord;
 
-import edu.stevens.cs548.clinic.research.DrugTreatmentRecord;
-import edu.stevens.cs548.clinic.research.Subject;
+
+import edu.stevens.cs548.clinic.domain.billing.Subject;
 
 public interface IResearchDAO {
 	

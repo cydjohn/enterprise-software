@@ -12,8 +12,8 @@ import javax.persistence.EntityManager;
 import edu.stevens.cs548.clinic.billing.service.ClinicResearch;
 import edu.stevens.cs548.clinic.billing.service.IResearchServiceLocal;
 import edu.stevens.cs548.clinic.billing.service.IResearchServiceRemote;
-import edu.stevens.cs548.clinic.research.DrugTreatmentRecord;
-import edu.stevens.cs548.clinic.research.Subject;
+import edu.stevens.cs548.clinic.domain.billing.DrugTreatmentRecord;
+import edu.stevens.cs548.clinic.domain.billing.Subject;
 import edu.stevens.cs548.clinic.research.domain.IResearchDAO;
 import edu.stevens.cs548.clinic.research.domain.IResearchDAO.ResearchExn;
 import edu.stevens.cs548.clinic.research.domain.IResearchFactory;
@@ -59,9 +59,9 @@ public class ResearchService implements IResearchServiceLocal, IResearchServiceR
 	@SuppressWarnings("unused")
 	private DrugTreatmentDTO toDTO(DrugTreatmentRecord treatment) {
 		DrugTreatmentDTO dto = drugTreatmentDtoFactory.createDrugTreatmentDTO();
-		dto.setPatientId(treatment.getPatient().getId());
+		dto.setPatientId(treatment.getSubject().getId());
 		dto.setTreatmentId(treatment.getId());
-		dto.setDrugName(treatment.getDrug());
+		dto.setDrugName(treatment.getDrugName());
 		dto.setDate(treatment.getDate());
 		dto.setDosage(treatment.getDosage());
 		return dto;

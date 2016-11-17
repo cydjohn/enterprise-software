@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
-import edu.stevens.cs548.clinic.billing.BillingRecord;
+import edu.stevens.cs548.clinic.domain.billing.BillingRecord;;
 
 public class BillingRecordDAO implements IBillingRecordDAO {
 	

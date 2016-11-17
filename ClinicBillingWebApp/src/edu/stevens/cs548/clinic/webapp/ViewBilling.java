@@ -9,8 +9,9 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import edu.stevens.cs548.clinic.billing.BillingRecord;
+
 import edu.stevens.cs548.clinic.billing.service.IBillingServiceLocal;
+import edu.stevens.cs548.clinic.domain.billing.BillingRecord;
 
 @Named("billingBacking")
 @ViewScoped

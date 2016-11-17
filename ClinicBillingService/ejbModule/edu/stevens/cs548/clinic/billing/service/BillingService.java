@@ -9,13 +9,13 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
-import edu.stevens.cs548.clinic.billing.BillingRecord;
 import edu.stevens.cs548.clinic.billing.domain.BillingRecordDAO;
 import edu.stevens.cs548.clinic.billing.domain.BillingRecordFactory;
 import edu.stevens.cs548.clinic.billing.domain.IBillingRecordFactory;
 import edu.stevens.cs548.clinic.domain.ITreatmentDAO.TreatmentExn;
 import edu.stevens.cs548.clinic.domain.Treatment;
 import edu.stevens.cs548.clinic.domain.TreatmentDAO;
+import edu.stevens.cs548.clinic.domain.billing.BillingRecord;
 
 /**
  * Session Bean implementation class UserService

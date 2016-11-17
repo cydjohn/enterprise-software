@@ -28,5 +28,9 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry combineaccessrules="false" kind="src" path="/ClinicDomain"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/ClinicDTOs"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/ClinicResearchServiceClient"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/ClinicResearchWebApp"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import edu.stevens.cs548.clinic.billing.BillingRecord;
+import edu.stevens.cs548.clinic.domain.billing.BillingRecord;
+
+
 
 public interface IBillingService {
 	

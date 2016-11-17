@@ -44,6 +44,7 @@ import edu.stevens.cs548.clinic.service.web.rest.data.dap.LinkType;
  * 
  * 
  */
+
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PatientType", propOrder = {
     "id",

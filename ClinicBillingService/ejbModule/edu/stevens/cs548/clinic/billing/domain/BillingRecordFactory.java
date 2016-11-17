@@ -1,6 +1,6 @@
 package edu.stevens.cs548.clinic.billing.domain;
 
-import edu.stevens.cs548.clinic.billing.BillingRecord;
+import edu.stevens.cs548.clinic.domain.billing.BillingRecord;
 
 public class BillingRecordFactory implements IBillingRecordFactory {
 

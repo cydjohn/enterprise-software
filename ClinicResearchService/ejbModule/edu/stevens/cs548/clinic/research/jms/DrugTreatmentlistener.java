@@ -16,7 +16,7 @@ import edu.stevens.cs548.clinic.domain.ITreatmentDAO;
 import edu.stevens.cs548.clinic.domain.Treatment;
 import edu.stevens.cs548.clinic.domain.TreatmentDAO;
 import edu.stevens.cs548.clinic.domain.ITreatmentDAO.TreatmentExn;
-import edu.stevens.cs548.clinic.domain.billing.BillingRecord;
+//import edu.stevens.cs548.clinic.domain.billing.BillingRecord;
 import edu.stevens.cs548.clinic.domain.billing.DrugTreatmentRecord;
 import edu.stevens.cs548.clinic.research.domain.ResearchDAO;
 import edu.stevens.cs548.clinic.service.dto.TreatmentDto;

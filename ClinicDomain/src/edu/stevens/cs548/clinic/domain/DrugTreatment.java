@@ -13,6 +13,7 @@ import javax.persistence.Table;
  * 
  */
 // TODO define discriminator column value 
+
 @Entity
 @NamedQueries({
 	@NamedQuery(

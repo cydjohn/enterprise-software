@@ -102,22 +102,37 @@ public class ProviderResource {
     }
     
     @POST
-    @Path("/id/treatments")
+    @Path("/{id}/treatments")
     @Consumes("application/xml")
     public Response addTreatment(@HeaderParam("id") String patientId, TreatmentRepresentation treatmentRep){
     	try {
     		TreatmentDto dto = null;
 	    	if (treatmentRep.getDrugTreatment() != null){
+//	    		dto = treatmentDtoFactory.createDrugTreatmentDto();
+//	    		dto.setPatient(Representation.getId(treatmentRep.getLinkPatient()));
+//	    		dto.setProvider(Representation.getId(treatmentRep.getLinkProvider()));
+//	    		dto.setDiagnosis(treatmentRep.getDiagnosis());
+//	    		dto.getDrugTreatment().setName(treatmentRep.getDrugTreatment().getName());
+//	    		dto.getDrugTreatment().setDosage(treatmentRep.getDrugTreatment().getDosage());
+//				long id = providerService.addTreatmentForPat(dto, Long.parseLong(patientId), this.getProvider(String.valueOf(dto.getProvider())).getNpi());
+//				UriBuilder ub = uriInfo.getAbsolutePathBuilder().path("{id}");
+//	    		URI url = ub.build(Long.toString(id));
+//	    		return Response.created(url).build();
+	    		// if the subtype of treatment is drugTreatment;
 	    		dto = treatmentDtoFactory.createDrugTreatmentDto();
+	    	
 	    		dto.setPatient(Representation.getId(treatmentRep.getLinkPatient()));
+	    		
 	    		dto.setProvider(Representation.getId(treatmentRep.getLinkProvider()));
+	    		
 	    		dto.setDiagnosis(treatmentRep.getDiagnosis());
 	    		dto.getDrugTreatment().setName(treatmentRep.getDrugTreatment().getName());
 	    		dto.getDrugTreatment().setDosage(treatmentRep.getDrugTreatment().getDosage());
-				long id = providerService.addTreatmentForPat(dto, Long.parseLong(patientId), this.getProvider(String.valueOf(dto.getProvider())).getNpi());
+				long id = providerService.addTreatmentForPat(dto,dto.getPatient(),dto.getProvider());
 				UriBuilder ub = uriInfo.getAbsolutePathBuilder().path("{id}");
 	    		URI url = ub.build(Long.toString(id));
 	    		return Response.created(url).build();
+	    		
 	    	} else if (treatmentRep.getSurgery() != null){
 	    		dto = treatmentDtoFactory.createSurgeryDto();
 	    		dto.setPatient(Representation.getId(treatmentRep.getLinkPatient()));

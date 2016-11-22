@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Temporal;
@@ -15,6 +16,9 @@ import javax.persistence.TemporalType;
 import edu.stevens.cs548.clinic.domain.Treatment;
 
 @Entity
+@NamedQuery(
+		name="SearchBillingRecords",
+		query="select b from BillingRecord b")
 public class BillingRecord implements Serializable {
 	private static final long serialVersionUID = 1L;
 	

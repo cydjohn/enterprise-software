@@ -43,5 +43,9 @@
 			<groupId>javax.annotation</groupId>
 			<artifactId>javax.annotation-api</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>edu.stevens.cs548</groupId>
+			<artifactId>ClinicDTOs</artifactId>
+		</dependency>
 	</dependencies>
 </project>

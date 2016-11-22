@@ -16,6 +16,12 @@
 					printMethod="edu.stevens.cs548.clinic.service.dto.util.DateAdapter.printDate"
 				/>
 			</jaxb:globalBindings>
+			<globalBindings>
+	    <serializable uid="1" />
+		<javaType name="java.util.Date" xmlType="xs:date"
+			parseMethod="edu.stevens.cs548.clinic.service.dto.util.DateAdapter.parseDate"
+			printMethod="edu.stevens.cs548.clinic.service.dto.util.DateAdapter.printDate" />
+	</globalBindings>
 		</appinfo>
 	</annotation>
     

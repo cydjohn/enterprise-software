@@ -10,6 +10,9 @@ import javax.persistence.*;
  *
  */
 @Entity
+@NamedQuery(
+		name="SearchDrugTreatmentRecords",
+		query="select t from DrugTreatment t")
 public class DrugTreatmentRecord implements Serializable {
 	/**
 	 * 

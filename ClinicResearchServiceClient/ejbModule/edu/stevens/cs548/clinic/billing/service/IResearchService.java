@@ -7,7 +7,6 @@ import java.util.List;
 import edu.stevens.cs548.clinic.domain.billing.DrugTreatmentRecord;
 
 
-
 public interface IResearchService {
 	
 	public class ResearchServiceExn extends Exception {

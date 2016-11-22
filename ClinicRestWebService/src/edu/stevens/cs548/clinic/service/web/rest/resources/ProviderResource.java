@@ -13,6 +13,8 @@ import edu.stevens.cs548.clinic.service.representations.Representation;
 import edu.stevens.cs548.clinic.service.representations.TreatmentRepresentation;
 
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.Date;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -108,17 +110,6 @@ public class ProviderResource {
     	try {
     		TreatmentDto dto = null;
 	    	if (treatmentRep.getDrugTreatment() != null){
-//	    		dto = treatmentDtoFactory.createDrugTreatmentDto();
-//	    		dto.setPatient(Representation.getId(treatmentRep.getLinkPatient()));
-//	    		dto.setProvider(Representation.getId(treatmentRep.getLinkProvider()));
-//	    		dto.setDiagnosis(treatmentRep.getDiagnosis());
-//	    		dto.getDrugTreatment().setName(treatmentRep.getDrugTreatment().getName());
-//	    		dto.getDrugTreatment().setDosage(treatmentRep.getDrugTreatment().getDosage());
-//				long id = providerService.addTreatmentForPat(dto, Long.parseLong(patientId), this.getProvider(String.valueOf(dto.getProvider())).getNpi());
-//				UriBuilder ub = uriInfo.getAbsolutePathBuilder().path("{id}");
-//	    		URI url = ub.build(Long.toString(id));
-//	    		return Response.created(url).build();
-	    		// if the subtype of treatment is drugTreatment;
 	    		dto = treatmentDtoFactory.createDrugTreatmentDto();
 	    	
 	    		dto.setPatient(Representation.getId(treatmentRep.getLinkPatient()));
@@ -134,32 +125,54 @@ public class ProviderResource {
 	    		return Response.created(url).build();
 	    		
 	    	} else if (treatmentRep.getSurgery() != null){
+//	    		dto = treatmentDtoFactory.createSurgeryDto();
+//	    		dto.setPatient(Representation.getId(treatmentRep.getLinkPatient()));
+//	    		dto.setProvider(Representation.getId(treatmentRep.getLinkProvider()));
+//	    		dto.setDiagnosis(treatmentRep.getDiagnosis());
+//	    		dto.getSurgery().setData(treatmentRep.getSurgery().getDate());;
+//	    		long id = providerService.addTreatmentForPat(dto, Long.parseLong(patientId), this.getProvider(String.valueOf(dto.getProvider())).getNpi());
+//				UriBuilder ub = uriInfo.getAbsolutePathBuilder().path("{id}");
+//	    		URI url = ub.build(Long.toString(id));
+//	    		return Response.created(url).build();
+	    		
 	    		dto = treatmentDtoFactory.createSurgeryDto();
 	    		dto.setPatient(Representation.getId(treatmentRep.getLinkPatient()));
 	    		dto.setProvider(Representation.getId(treatmentRep.getLinkProvider()));
 	    		dto.setDiagnosis(treatmentRep.getDiagnosis());
-	    		dto.getSurgery().setData(treatmentRep.getSurgery().getDate());;
-	    		long id = providerService.addTreatmentForPat(dto, Long.parseLong(patientId), this.getProvider(String.valueOf(dto.getProvider())).getNpi());
+	    		dto.getSurgery().setData(treatmentRep.getSurgery().getDate());
+	    		long id = providerService.addTreatmentForPat(dto,dto.getPatient(),dto.getProvider());
 				UriBuilder ub = uriInfo.getAbsolutePathBuilder().path("{id}");
 	    		URI url = ub.build(Long.toString(id));
 	    		return Response.created(url).build();
 	    	} else if (treatmentRep.getRadiology() != null){
+//	    		dto = treatmentDtoFactory.createRadiologyDto();
+//	    		dto.setPatient(Representation.getId(treatmentRep.getLinkPatient()));
+//	    		dto.setProvider(Representation.getId(treatmentRep.getLinkProvider()));
+//	    		dto.setDiagnosis(treatmentRep.getDiagnosis());
+//	    		dto.getRadiology().setDate(treatmentRep.getRadiology().getDate());
+//	    		long id = providerService.addTreatmentForPat(dto, Long.parseLong(patientId), this.getProvider(String.valueOf(dto.getProvider())).getNpi());
+//				UriBuilder ub = uriInfo.getAbsolutePathBuilder().path("{id}");
+//	    		URI url = ub.build(Long.toString(id));
+//	    		return Response.created(url).build();
 	    		dto = treatmentDtoFactory.createRadiologyDto();
 	    		dto.setPatient(Representation.getId(treatmentRep.getLinkPatient()));
 	    		dto.setProvider(Representation.getId(treatmentRep.getLinkProvider()));
 	    		dto.setDiagnosis(treatmentRep.getDiagnosis());
-	    		dto.getRadiology().setDate(treatmentRep.getRadiology().getDate());
-	    		long id = providerService.addTreatmentForPat(dto, Long.parseLong(patientId), this.getProvider(String.valueOf(dto.getProvider())).getNpi());
+	    		ArrayList<Date> dates = (ArrayList<Date>) treatmentRep.getRadiology().getDate();
+	    		for (Date date : dates) {
+		    		dto.getRadiology().getDate().add(date);
+				}	
+	    		long id = providerService.addTreatmentForPat(dto,dto.getPatient(),dto.getProvider());
 				UriBuilder ub = uriInfo.getAbsolutePathBuilder().path("{id}");
 	    		URI url = ub.build(Long.toString(id));
 	    		return Response.created(url).build();
 	    	}
     	} catch (TreatmentNotFoundExn e) {
-    		throw new WebApplicationException();
+    		throw new WebApplicationException(404);
 		} catch (PatientNotFoundExn e) {
-			throw new WebApplicationException();
+			throw new WebApplicationException(404);
 		} catch (ProviderServiceExn e) {
-			throw new WebApplicationException();
+			throw new WebApplicationException(404);
 		}
 		return null;
     }
@@ -173,11 +186,11 @@ public class ProviderResource {
 			TreatmentRepresentation treatmentRep = new TreatmentRepresentation(dto, uriInfo);
     		return treatmentRep;
     	} catch (NumberFormatException e) {
-			throw new WebApplicationException();
+			throw new WebApplicationException(404);
 		} catch (TreatmentNotFoundExn e) {
-			throw new WebApplicationException();
+			throw new WebApplicationException(404);
 		} catch (ProviderServiceExn e) {
-			throw new WebApplicationException();
+			throw new WebApplicationException(404);
 		}
     	
     }

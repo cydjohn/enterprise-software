@@ -7,7 +7,6 @@ import java.util.List;
 import edu.stevens.cs548.clinic.domain.billing.BillingRecord;
 
 
-
 public interface IBillingService {
 	
 	public class BillingServiceExn extends Exception {
@@ -21,7 +20,6 @@ public interface IBillingService {
 			messageCode = m;
 		}
 	}
-	
 	
 	public class BillingDTO implements Serializable {
 		/**

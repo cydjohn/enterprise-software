@@ -39,9 +39,5 @@
 			<groupId>javax.enterprise</groupId>
 			<artifactId>cdi-api</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>edu.stevens.cs548</groupId>
-			<artifactId>ClinicDTOs</artifactId>
-		</dependency>
 	</dependencies>
 </project>

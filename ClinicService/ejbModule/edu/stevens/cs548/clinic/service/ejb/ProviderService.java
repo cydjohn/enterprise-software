@@ -8,7 +8,16 @@ import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.jms.Connection;
+import javax.jms.ConnectionFactory;
+import javax.jms.JMSException;
+import javax.jms.MessageProducer;
+import javax.jms.ObjectMessage;
+import javax.jms.Session;
+import javax.jms.Topic;
 import javax.persistence.EntityManager;
+
+import com.sun.xml.ws.streaming.TidyXMLStreamReader;
 
 import edu.stevens.cs548.clinic.domain.IProviderDAO.ProviderExn;
 import edu.stevens.cs548.clinic.domain.ITreatmentDAO.TreatmentExn;
@@ -86,36 +95,107 @@ public class ProviderService implements IProviderServiceLocal, IProviderServiceR
 		}
 	}
 
+	
+	@Resource(mappedName="jms/TreatmentPool")
+	private ConnectionFactory treatmentConnFactory;
+	
+	@Resource(mappedName="jms/Treatment")
+	private Topic treatmentTopic;
+	
+	
 	@Override
 	public long addTreatmentForPat(TreatmentDto treatment, long pid, long npi)
 			throws TreatmentNotFoundExn, PatientNotFoundExn, ProviderServiceExn {
+		long tid =0;
 		try {
 			//Provider prov = providerDAO.getProviderByNPI(npi);
 			Provider prov = providerDAO.getProvider(npi);
 			TreatmentFactory treatmentFactory = new TreatmentFactory();
+			Connection treatmentConn = null;
+			try {
+			treatmentConn = treatmentConnFactory.createConnection();
+			Session session = treatmentConn.createSession(true,Session.AUTO_ACKNOWLEDGE);
+			MessageProducer producer = session.createProducer(treatmentTopic);
 			if (npi != treatment.getProvider()){
 				throw new ProviderServiceExn("The provider can not add this treatment:npi = "+npi);
 			}
 			if (treatment.getDrugTreatment() != null){
 				Treatment t = treatmentFactory.createDrugTreatment(treatment.getDiagnosis(), treatment.getDrugTreatment().getName(), treatment.getDrugTreatment().getDosage());
 				t.setProvider(prov);
-				return patientDAO.getPatient(pid).addTreatment(t);
+				
+				
+					
+					tid  = patientDAO.getPatient(pid).addTreatment(t);
+					TreatmentDto treatmentDto = treatment;
+					treatmentDto.setId(tid);
+					
+					ObjectMessage message = session.createObjectMessage();
+					
+					message.setObject(treatmentDto);
+					message.setStringProperty("treatmentType", "Drug");
+					producer.send(message);
+				
+				
+				return tid;
+				
 			} else if (treatment.getSurgery() != null){
+//				Treatment t = treatmentFactory.createSurgery(treatment.getDiagnosis(), treatment.getSurgery().getData());
+//				t.setProvider(prov);
+//				return patientDAO.getPatient(pid).addTreatment(t);
 				Treatment t = treatmentFactory.createSurgery(treatment.getDiagnosis(), treatment.getSurgery().getData());
 				t.setProvider(prov);
-				return patientDAO.getPatient(pid).addTreatment(t);
+				tid =  patientDAO.getPatient(pid).addTreatment(t);
+				/* this part is for topic*/				
+				TreatmentDto treatmentDto = treatment;
+				treatmentDto.setId(tid);	
+				ObjectMessage message = session.createObjectMessage();
+				message.setObject(treatment);
+				message.setStringProperty("treatmentType", "Surgery");
+				producer.send(message);
+//				System.out.println("SurgeyTreatment = "+treatment.getSurgery().getData());
+				/* ********************** */				
+				return tid;
 			} else if (treatment.getRadiology() != null) {
+//				Treatment t = treatmentFactory.createRadiology(treatment.getDiagnosis(), treatment.getRadiology().getDate());
+//				t.setProvider(prov);
+//				return patientDAO.getPatient(pid).addTreatment(t);
 				Treatment t = treatmentFactory.createRadiology(treatment.getDiagnosis(), treatment.getRadiology().getDate());
 				t.setProvider(prov);
-				return patientDAO.getPatient(pid).addTreatment(t);
+				tid = patientDAO.getPatient(pid).addTreatment(t);
+				
+				/* this part is for topic*/
+				TreatmentDto treatmentDto = treatment;
+				treatmentDto.setId(tid);	
+				ObjectMessage message = session.createObjectMessage();
+				message.setObject(treatment);
+				message.setStringProperty("treatmentType", "Radiology");
+				producer.send(message);
+				System.out.println("Radiology = "+treatment.getRadiology().getDate());
+				/* ********************** */
+				
+				return tid;
 			} else {
 				throw new TreatmentNotFoundExn("The treatment type is null!");
+			}
+			} catch (JMSException e) {
+				logger.severe("JMS Error :"+ e);
+				
+			} finally {
+				if (treatmentConn != null) {
+					try {
+						treatmentConn.close();
+					} catch (JMSException e) {
+						logger.severe("Error closing JMS connection: "+e);
+						
+					}
+				}
 			}
 		} catch (ProviderExn e) {
 			throw new ProviderServiceExn(e.toString());
 		} catch (PatientExn e){
 			throw new ProviderServiceExn(e.toString());
 		}
+		return 0;
 		
 	}
 

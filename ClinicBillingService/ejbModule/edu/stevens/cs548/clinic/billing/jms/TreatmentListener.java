@@ -18,7 +18,7 @@ import edu.stevens.cs548.clinic.domain.ITreatmentDAO.TreatmentExn;
 import edu.stevens.cs548.clinic.domain.Treatment;
 import edu.stevens.cs548.clinic.domain.TreatmentDAO;
 import edu.stevens.cs548.clinic.domain.billing.BillingRecord;
-import edu.stevens.cs548.clinic.service.dto.treatment.TreatmentDto;
+import edu.stevens.cs548.clinic.service.dto.*;
 
 /**
  * Message-Driven Bean implementation class for: TreatmentListener

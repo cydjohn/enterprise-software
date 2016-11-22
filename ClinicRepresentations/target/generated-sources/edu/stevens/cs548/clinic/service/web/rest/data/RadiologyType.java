@@ -8,6 +8,7 @@
 
 package edu.stevens.cs548.clinic.service.web.rest.data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -42,9 +43,15 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 @XmlType(name = "RadiologyType", propOrder = {
     "date"
 })
-public class RadiologyType {
+public class RadiologyType 
+implements Serializable
+{
 
-    @XmlElement(required = true, type = String.class)
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@XmlElement(required = true, type = String.class)
     @XmlJavaTypeAdapter(Adapter1 .class)
     @XmlSchemaType(name = "date")
     protected List<Date> date;

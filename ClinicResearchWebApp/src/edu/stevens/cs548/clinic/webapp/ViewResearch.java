@@ -12,7 +12,6 @@ import javax.inject.Named;
 import edu.stevens.cs548.clinic.billing.service.IResearchServiceLocal;
 import edu.stevens.cs548.clinic.domain.billing.DrugTreatmentRecord;
 
-
 @Named("billingBacking")
 @ViewScoped
 public class ViewResearch implements Serializable {

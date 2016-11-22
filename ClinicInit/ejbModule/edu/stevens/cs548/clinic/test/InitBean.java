@@ -61,8 +61,8 @@ public class InitBean {
 	
 	@Inject @ClinicDomain EntityManager em;
 	
-	@Inject IPatientServiceLocal patientService;
-	@Inject IProviderServiceLocal providerService;
+//	@Inject IPatientServiceLocal patientService;
+//	@Inject IProviderServiceLocal providerService;
 
 	@PostConstruct
 	private void init() {
@@ -114,52 +114,48 @@ public class InitBean {
 			logger.info("Added "+ surgery.getTreatmentType() +" treatment with id "+surgery.getId() + " to " + surgery.getPatient().getName());
 				
 			
-			PatientDtoFactory patFac = new PatientDtoFactory();
-			PatientDto sean = patFac.createPatientDto();
-			sean.setName("Sean Chen");
-			sean.setPatientId(666888999);
-			sean.setDob(calendar.getTime());
-			sean.setAge(32);
-			
-			long patId = patientService.addPatient(sean);
-			String seanName = patientService.getPatient(patId).getName();
-			long seanId = patientService.getPatient(patId).getId();
-			logger.info("Added patient "+seanName+" with id "+seanId);
-			
-			ProviderDtoFactory proFac = new ProviderDtoFactory();
-			ProviderDto jane = proFac.createProviderDto();
-			jane.setName("Jane Shi");
-			jane.setNpi(00000002);
-			jane.setSpecialization("fever");
-			long proId = providerService.addProvider(jane);
-			
-			String janeName = providerService.getProvider(proId).getName();
-			long janeId = providerService.getProvider(proId).getId();
-			logger.info("Added provider "+janeName+" with id "+janeId);
-			
-			TreatmentDtoFactory treatFac = new TreatmentDtoFactory();
-			
-			TreatmentDto treatDto = treatFac.createSurgeryDto();
-			treatDto.setDiagnosis("AAA");
-			treatDto.setPatient(seanId);
-			treatDto.setProvider(janeId);//getNpi()
-			DrugTreatmentType drugTreatmentType = new DrugTreatmentType();
-			drugTreatmentType.setName("yyyyyyy");
-			drugTreatmentType.setDosage(25);
-			treatDto.setDrugTreatment(drugTreatmentType);;
-			long treatId = providerService.addTreatmentForPat(treatDto, patId,janeId);// jane.getNpi()
-			
-			logger.info("patient's name:" + patId + " and provider with npi:" + providerService.getProvider(proId).getNpi() + "add drug treatment with id:" + treatId);
-			
-			String diag = patientService.getTreatment(patId, treatId).getDiagnosis();
-			logger.info("new treatment diagnosis is " + diag);
+//			PatientDtoFactory patFac = new PatientDtoFactory();
+//			PatientDto sean = patFac.createPatientDto();
+//			sean.setName("Sean Chen");
+//			sean.setPatientId(666888999);
+//			sean.setDob(calendar.getTime());
+//			sean.setAge(32);
+//			
+//			long patId = patientService.addPatient(sean);
+//			String seanName = patientService.getPatient(patId).getName();
+//			long seanId = patientService.getPatient(patId).getId();
+//			logger.info("Added patient "+seanName+" with id "+seanId);
+//			
+//			ProviderDtoFactory proFac = new ProviderDtoFactory();
+//			ProviderDto jane = proFac.createProviderDto();
+//			jane.setName("Jane Shi");
+//			jane.setNpi(00000002);
+//			jane.setSpecialization("fever");
+//			long proId = providerService.addProvider(jane);
+//			
+//			String janeName = providerService.getProvider(proId).getName();
+//			long janeId = providerService.getProvider(proId).getId();
+//			logger.info("Added provider "+janeName+" with id "+janeId);
+//			
+//			TreatmentDtoFactory treatFac = new TreatmentDtoFactory();
+//			
+//			TreatmentDto treatDto = treatFac.createSurgeryDto();
+//			treatDto.setDiagnosis("AAA");
+//			treatDto.setPatient(seanId);
+//			treatDto.setProvider(janeId);//getNpi()
+//			DrugTreatmentType drugTreatmentType = new DrugTreatmentType();
+//			drugTreatmentType.setName("yyyyyyy");
+//			drugTreatmentType.setDosage(25);
+//			treatDto.setDrugTreatment(drugTreatmentType);;
+//			long treatId = providerService.addTreatmentForPat(treatDto, patId,janeId);// jane.getNpi()
+//			
+//			logger.info("patient's name:" + patId + " and provider with npi:" + providerService.getProvider(proId).getNpi() + "add drug treatment with id:" + treatId);
+//			
+//			String diag = patientService.getTreatment(patId, treatId).getDiagnosis();
+//			logger.info("new treatment diagnosis is " + diag);
 				
 		} catch (ProviderExn e) {
 			IllegalStateException ex = new IllegalStateException("Failed to add provider record.");
-			ex.initCause(e);
-			throw ex;
-		} catch (PatientServiceExn e) {
-			IllegalStateException ex = new IllegalStateException("Failed to add patient record.");
 			ex.initCause(e);
 			throw ex;
 		} catch (PatientExn e) {
@@ -169,10 +165,6 @@ public class InitBean {
 			ex.initCause(e);
 			throw ex;
 			
-		} catch (ProviderServiceExn e) {
-			IllegalStateException ex = new IllegalStateException("Failed to add provider record.");
-			ex.initCause(e);
-			throw ex;
 		} 
 			
 	}

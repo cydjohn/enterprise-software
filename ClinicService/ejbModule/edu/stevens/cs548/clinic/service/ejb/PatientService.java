@@ -8,6 +8,8 @@ import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.jms.ConnectionFactory;
+import javax.jms.Topic;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -102,6 +104,7 @@ public class PatientService implements IPatientServiceLocal,
 			throw new PatientServiceExn(e.toString());
 		}
 	}
+
 
 	public class TreatmentExporter implements ITreatmentExporter<TreatmentDto> {
 		

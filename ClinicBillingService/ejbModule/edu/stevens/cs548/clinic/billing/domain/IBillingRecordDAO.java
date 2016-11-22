@@ -5,7 +5,6 @@ import java.util.List;
 import edu.stevens.cs548.clinic.domain.billing.BillingRecord;
 
 
-
 public interface IBillingRecordDAO {
 	
 	public static class BillingRecordExn extends Exception {

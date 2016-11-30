@@ -1,0 +1,122 @@
+@prefix clinic:  <http://www.example.org/clinic/>.
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix owl:     <http://www.w3.org/2002/07/owl#>.
+@prefix xsd:     <http://www.w3c.org/2001/XMLSchema-datatypes>.
+
+@prefix patient:  <http://www.example.org/clinic/patient/>.
+@prefix provider:  <http://www.example.org/clinic/provider/>.
+@prefix treatment:  <http://www.example.org/clinic/treatment/>.
+@prefix drugTreatment:  <http://www.example.org/clinic/drugTreatment/>.
+@prefix surgery:  <http://www.example.org/clinic/surgery/>.
+@prefix radiology:  <http://www.example.org/clinic/radiology/>.
+
+clinic:patient rdf:type rdfs:Class.
+patient:id rdf:type rdf:Property;
+   	       rdfs:domain clinic:patient.
+patient:patientId rdf:type rdf:Property;
+		   rdfs:domain clinic:patient. 
+patient:name rdf:type rdf:Property;
+		   rdfs:domain clinic:patient. 
+patient:birth rdf:type rdf:Property;
+		   rdfs:domain clinic:patient.
+patient:treatment rdf:type rdf:Property;
+		   rdfs:domain clinic:patient.
+patient:hasIdentityNo rdf:type owl:FunctionalProperty;
+					  rdf:type owl:InverseFunctionalProperty;
+					  rdfs:domain clinic:patient;
+					  rdfs:range xsd:Integer.
+		   
+clinic:provider rdf:type rdfs:Class.
+provider:surgeon rdf:type clinic:provider.
+provider:radiologist rdf:type clinic:provider.
+provider:internist rdf:type clinic:provider.
+provider:id rdf:type rdf:Property;
+		   rdfs:domain clinic:provider.
+provider:npi rdf:type rdf:Property;
+		   rdfs:domain clinic:provider.
+provider:name rdf:type rdf:Property;
+		   rdfs:domain clinic:provider.
+provider:specilization rdf:type rdf:Property;
+		   rdfs:domain clinic:provider.
+		   
+clinic:treatment rdf:type rdfs:Class.
+treatment:id rdf:type rdf:Property;
+		   rdfs:domain clinic:treatment.
+treatment:npi rdf:type rdf:Property;
+		   rdfs:domain clinic:provider.
+treatment:diagnosis rdf:type rdf:Property;
+		   rdfs:domain clinic:treatment.
+treatment:providedBy rdf:type owl:FunctionalProperty;
+		   rdfs:domain clinic:provider.
+treatment:receivedBy rdf:type owl:FunctionalProperty;
+		   rdfs:domain clinic:patient.
+treatment:receive rdf:type rdf:property;
+		   rdfs:domain clinic:treatment;
+		   owl:inverseOf treatment:receivedBy.
+treatment:radiologistProvided rdf:type owl:FunctionalProperty;
+		   rdfs:domain provider:radiologist.
+provider:radiologist owl:equivalentClass
+[ a owl:Restriction;
+ owl:onProperty treatment:receive;
+ owl:someValuesFrom clinic:treamtent
+].
+		   
+clinic:drugTreatment rdf:type rdfs:Class;
+		   rdfs:subClassOf clinic:treatment.
+drugTreatment:name rdf:type rdf:Property;
+ 		   rdfs:domain clinic:drugtreatment.
+drugTreatment:dosage rdf:type rdf:Property;
+ 		   rdfs:domain clinic:drugtreatment.
+ 		   
+clinic:surgery rdf:type rdfs:Class;
+		   rdfs:subClassOf clinic:treatment.
+surgery:date rdf:type rdf:Property;
+ 		   rdfs:domain clinic:surgery.
+
+clinic:radiology rdf:type rdfs:Class;
+		   rdfs:subClassOf clinic:treatment.
+radiology:dates rdf:type rdf:Property;
+ 		   rdfs:domain clinic:radiology.
+
+patient:123456789 patient:id "123456789" .
+patient:123456789 patient:patientId "11111111" .
+patient:123456789 patient:name "John".
+patient:123456789 patient:birth "1999-01-01" .
+patient:123456789 patient:treatment "drugTreatment" . 
+
+patient:1000000 patient:id "1000000" .
+patient:1000000 patient:patientId "122222" .
+patient:1000000 patient:name "sally" .
+patient:1000000 patient:birth "1993-03-01" .
+patient:1000000 patient:treatment "radiology" .
+
+patient:1000000 patient:id "130043200" .
+patient:1000000 patient:patientId "1223212" .
+patient:1000000 patient:name "lucy" .
+patient:1000000 patient:birth "1992-03-01" .
+patient:1000000 patient:treatment "radiology" .
+
+
+provider:radiologist provider:id "53212345436".
+provider:radiologist provider:npi "22222222".
+provider:radiologist provider:name "smith".
+provider:radiologist provider:specilization "radiology".
+
+
+treatment:234523535235 treatment:id "234523535235" .
+treatment:234523535235 treatment:npi "22222222" .
+treatment:234523535235 treatment:diagnosis "asfddasfa" .
+treatment:234523535235 treatment:providedBy "smith" .
+treatment:234523535235 treatment:receive "radiology" .
+
+treatment:124124532 treatment:id "124124532" .
+treatment:124124532 treatment:npi "3333333333" .
+treatment:124124532 treatment:diagnosis "fewgvsd" .
+treatment:124124532 treatment:providedBy "joan" .
+treatment:124124532 treatment:receive "radiology" .
+
+
+
+
+

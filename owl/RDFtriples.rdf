@@ -1,0 +1,142 @@
+<div xmlns="http://www.w3.org/1999/xhtml"
+  prefix="
+    owl: http://www.w3.org/2002/07/owl#
+    patient: http://www.example.org/clinic/patient/
+    rdfs: http://www.w3.org/2000/01/rdf-schema#
+    clinic: http://www.example.org/clinic/
+    rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
+    treatment: http://www.example.org/clinic/treatment/
+    provider: http://www.example.org/clinic/provider/"
+  >
+  <div typeof="rdfs:Resource" about="http://www.example.org/clinic/patient/123456789">
+    <div property="patient:id" content="123456789"></div>
+    <div property="patient:patientId" content="11111111"></div>
+    <div property="patient:name" content="John"></div>
+    <div property="patient:treatment" content="drugTreatment"></div>
+    <div property="patient:birth" content="1999-01-01"></div>
+  </div>
+  <div typeof="rdf:Property" about="http://www.example.org/clinic/patient/treatment">
+    <div rel="rdfs:domain" resource="http://www.example.org/clinic/patient"></div>
+  </div>
+  <div typeof="rdf:Property" about="http://www.example.org/clinic/provider/specilization">
+    <div rel="rdfs:domain" resource="http://www.example.org/clinic/provider"></div>
+  </div>
+  <div typeof="rdfs:Resource" about="http://www.example.org/clinic/patient/1000000">
+    <div property="patient:birth" content="1993-03-01"></div>
+    <div property="patient:patientId" content="122222"></div>
+    <div property="patient:birth" content="1992-03-01"></div>
+    <div property="patient:id" content="1000000"></div>
+    <div property="patient:name" content="lucy"></div>
+    <div property="patient:name" content="sally"></div>
+    <div property="patient:treatment" content="radiology"></div>
+    <div property="patient:patientId" content="1223212"></div>
+    <div property="patient:id" content="130043200"></div>
+  </div>
+  <div typeof="rdf:Property" about="http://www.example.org/clinic/patient/name">
+    <div rel="rdfs:domain" resource="http://www.example.org/clinic/patient"></div>
+  </div>
+  <div typeof="rdfs:Resource" about="http://www.example.org/clinic/treatment/234523535235">
+    <div property="treatment:receive" content="radiology"></div>
+    <div property="treatment:id" content="234523535235"></div>
+    <div property="treatment:diagnosis" content="asfddasfa"></div>
+    <div property="treatment:npi" content="22222222"></div>
+    <div property="treatment:providedBy" content="smith"></div>
+  </div>
+  <div typeof="rdf:Property" about="http://www.example.org/clinic/treatment/diagnosis">
+    <div rel="rdfs:domain" resource="http://www.example.org/clinic/treatment"></div>
+  </div>
+  <div typeof="owl:InverseFunctionalProperty" about="http://www.example.org/clinic/patient/hasIdentityNo">
+    <div rel="rdfs:range" resource="http://www.w3c.org/2001/XMLSchema-datatypesInteger"></div>
+    <div rel="rdfs:domain" resource="http://www.example.org/clinic/patient"></div>
+    <div rel="rdf:type" resource="http://www.w3.org/2002/07/owl#FunctionalProperty"></div>
+  </div>
+  <div typeof="rdf:Property" about="http://www.example.org/clinic/drugTreatment/dosage">
+    <div rel="rdfs:domain" resource="http://www.example.org/clinic/drugtreatment"></div>
+  </div>
+  <div typeof="owl:FunctionalProperty" about="http://www.example.org/clinic/treatment/providedBy">
+    <div rel="rdfs:domain" resource="http://www.example.org/clinic/provider"></div>
+  </div>
+  <div typeof="rdfs:Class" about="http://www.example.org/clinic/drugTreatment">
+    <div rel="rdfs:subClassOf" resource="http://www.example.org/clinic/treatment"></div>
+  </div>
+  <div typeof="rdf:Property" about="http://www.example.org/clinic/drugTreatment/name">
+    <div rel="rdfs:domain" resource="http://www.example.org/clinic/drugtreatment"></div>
+  </div>
+  <div typeof="rdf:Property" about="http://www.example.org/clinic/radiology/dates">
+    <div rel="rdfs:domain" resource="http://www.example.org/clinic/radiology"></div>
+  </div>
+  <div typeof="rdf:Property" about="http://www.example.org/clinic/provider/name">
+    <div rel="rdfs:domain" resource="http://www.example.org/clinic/provider"></div>
+  </div>
+  <div typeof="rdf:Property" about="http://www.example.org/clinic/patient/patientId">
+    <div rel="rdfs:domain" resource="http://www.example.org/clinic/patient"></div>
+  </div>
+  <div typeof="owl:FunctionalProperty" about="http://www.example.org/clinic/treatment/radiologistProvided">
+    <div rel="rdfs:domain">
+      <div typeof="clinic:provider" about="http://www.example.org/clinic/provider/radiologist">
+        <div property="provider:specilization" content="radiology"></div>
+        <div property="provider:npi" content="22222222"></div>
+        <div property="provider:name" content="smith"></div>
+        <div rel="owl:equivalentClass">
+          <div typeof="owl:Restriction">
+            <div rel="owl:onProperty" resource="http://www.example.org/clinic/treatment/receive"></div>
+            <div rel="owl:someValuesFrom" resource="http://www.example.org/clinic/treamtent"></div>
+          </div>
+        </div>
+        <div property="provider:id" content="53212345436"></div>
+      </div>
+    </div>
+  </div>
+  <div typeof="rdfs:Resource" about="http://www.example.org/clinic/treatment/124124532">
+    <div property="treatment:receive" content="radiology"></div>
+    <div property="treatment:diagnosis" content="fewgvsd"></div>
+    <div property="treatment:providedBy" content="joan"></div>
+    <div property="treatment:id" content="124124532"></div>
+    <div property="treatment:npi" content="3333333333"></div>
+  </div>
+  <div typeof="rdf:Property" about="http://www.example.org/clinic/provider/npi">
+    <div rel="rdfs:domain" resource="http://www.example.org/clinic/provider"></div>
+  </div>
+  <div typeof="clinic:provider" about="http://www.example.org/clinic/provider/internist">
+  </div>
+  <div typeof="clinic:provider" about="http://www.example.org/clinic/provider/surgeon">
+  </div>
+  <div typeof="rdf:Property" about="http://www.example.org/clinic/treatment/npi">
+    <div rel="rdfs:domain" resource="http://www.example.org/clinic/provider"></div>
+  </div>
+  <div typeof="rdf:Property" about="http://www.example.org/clinic/treatment/id">
+    <div rel="rdfs:domain" resource="http://www.example.org/clinic/treatment"></div>
+  </div>
+  <div typeof="rdf:Property" about="http://www.example.org/clinic/provider/id">
+    <div rel="rdfs:domain" resource="http://www.example.org/clinic/provider"></div>
+  </div>
+  <div typeof="rdf:Property" about="http://www.example.org/clinic/surgery/date">
+    <div rel="rdfs:domain" resource="http://www.example.org/clinic/surgery"></div>
+  </div>
+  <div typeof="rdf:Property" about="http://www.example.org/clinic/patient/id">
+    <div rel="rdfs:domain" resource="http://www.example.org/clinic/patient"></div>
+  </div>
+  <div typeof="rdf:Property" about="http://www.example.org/clinic/patient/birth">
+    <div rel="rdfs:domain" resource="http://www.example.org/clinic/patient"></div>
+  </div>
+  <div typeof="rdf:property" about="http://www.example.org/clinic/treatment/receive">
+    <div rel="rdfs:domain" resource="http://www.example.org/clinic/treatment"></div>
+    <div rel="owl:inverseOf">
+      <div typeof="owl:FunctionalProperty" about="http://www.example.org/clinic/treatment/receivedBy">
+        <div rel="rdfs:domain" resource="http://www.example.org/clinic/patient"></div>
+      </div>
+    </div>
+  </div>
+  <div typeof="rdfs:Class" about="http://www.example.org/clinic/surgery">
+    <div rel="rdfs:subClassOf" resource="http://www.example.org/clinic/treatment"></div>
+  </div>
+  <div typeof="rdfs:Class" about="http://www.example.org/clinic/patient">
+  </div>
+  <div typeof="rdfs:Class" about="http://www.example.org/clinic/treatment">
+  </div>
+  <div typeof="rdfs:Class" about="http://www.example.org/clinic/radiology">
+    <div rel="rdfs:subClassOf" resource="http://www.example.org/clinic/treatment"></div>
+  </div>
+  <div typeof="rdfs:Class" about="http://www.example.org/clinic/provider">
+  </div>
+</div>

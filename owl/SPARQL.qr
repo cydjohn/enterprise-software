@@ -1,0 +1,23 @@
+PREFIX patient:  <http://www.example.org/clinic/patient/>
+PREFIX pat: <http://purl.org/hpi/patchr#>
+SELECT ?patientId ?name ?birth
+WHERE
+  { 
+  	?x patient:patientId ?patientId .
+  	?x patient:name ?name .
+    ?x patient:birth ?birth.
+  	?x patient:treatment "radiology"
+}
+
+PREFIX patient:  <http://www.example.org/clinic/patient/>
+PREFIX provider:  <http://www.example.org/clinic/provider/>
+PREFIX treatment:  <http://www.example.org/clinic/treatment/>
+PREFIX pat: <http://purl.org/hpi/patchr#>
+SELECT ?npi ?diagnosis ?providedBy
+WHERE
+  { 
+  	?x treatment:npi ?npi .
+  	?x treatment:diagnosis ?diagnosis .
+    ?x treatment:providedBy ?providedBy.
+  	?x treatment:receive "radiology"
+}
